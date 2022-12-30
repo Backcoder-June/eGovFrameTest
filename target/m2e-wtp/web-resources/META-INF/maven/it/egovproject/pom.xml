@@ -105,6 +105,14 @@
 		    <artifactId>jstl</artifactId>
 		    <version>1.2</version>
         </dependency>
+        
+        <!-- https://mvnrepository.com/artifact/org.webjars/jquery -->
+		<dependency>
+		    <groupId>org.webjars</groupId>
+		    <artifactId>jquery</artifactId>
+		    <version>3.6.0</version>
+		</dependency>
+        
 
         <dependency>
 		    <groupId>taglibs</groupId>
@@ -124,7 +132,7 @@
 			<version>2.5.0</version>
 		</dependency>
 
-        <!-- mysql이나 oracle DB 사용시 아래 설정 추가
+        <!-- mysql이나 oracle DB 사용시 아래 설정 추가 -->
         <dependency>
             <groupId>com.googlecode.log4jdbc</groupId>
             <artifactId>log4jdbc</artifactId>
@@ -149,14 +157,22 @@
             <version>5.1.31</version>
         </dependency>
 
-        <dependency>
+  		<dependency>
             <groupId>ojdbc</groupId>
             <artifactId>ojdbc</artifactId>
             <version>14</version>
             <scope>system</scope>
             <systemPath>${basedir}/src/main/webapp/WEB-INF/lib/ojdbc-14.jar</systemPath>
         </dependency>
-        -->
+        
+ <dependency>
+    <groupId>org.springframework</groupId>
+    <artifactId>spring-jdbc</artifactId>
+    <version>4.3.18.RELEASE</version>
+</dependency>
+        
+        
+      <!--  -->  
 	</dependencies>
 
 	<build>
