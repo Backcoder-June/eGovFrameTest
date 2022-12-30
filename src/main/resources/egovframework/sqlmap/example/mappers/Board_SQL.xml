@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="egovframework.example.sample.service.impl.BoardMapper">
+
+	<resultMap id="sample" type="egovframework.example.sample.service.BoardVO">
+		<result property="job" column="job"/>
+		<result property="title" column="title"/>
+		<result property="contents" column="contents"/>
+	</resultMap>
+	
+	<insert id="insertBoard" parameterType="boardVO">
+			INSERT INTO BOARD
+				( job
+				  , title
+				  , contents )
+			VALUES ( #{job}
+				  , #{title}
+				  , #{contents} )
+	</insert>
+	
+	
+	
+	
+
+</mapper>
