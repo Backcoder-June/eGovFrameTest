@@ -3,7 +3,6 @@ package egovframework.example.sample.web;
 
 import javax.annotation.Resource;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -16,7 +15,8 @@ public class DeptController {
 	
 	@Resource(name="boardVO")
 	public BoardVO boardVO;
-	@Resource(name="boardService")
+	
+	@Resource(name="boardServiceImpl")
 	public BoardService boardService;
 
 	@RequestMapping(value="/write.do", method=RequestMethod.GET )

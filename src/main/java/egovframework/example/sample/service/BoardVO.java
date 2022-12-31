@@ -2,7 +2,7 @@ package egovframework.example.sample.service;
 
 import org.springframework.stereotype.Component;
 
-@Component
+@Component("boardVO")
 public class BoardVO {
 	
 	private String job;
