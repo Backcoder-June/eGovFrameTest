@@ -20,17 +20,30 @@
 	
 	<select id="getAllBoard" resultType="boardVO">
 			SELECT
-				job, title, contents
+				id, job, title, contents
 			FROM BOARD
+			ORDER BY id desc
 	</select>
 	
 	<select id="getOneBoard" resultType="boardVO">
 			SELECT
-				job, title, contents
+				id, job, title, contents
 			FROM BOARD
-			WHERE title=#{title}
-	
+			WHERE id=#{id}
 	</select>
+	
+	<update id="updateBoard" parameterType="boardVO">
+			UPDATE BOARD
+				SET job=#{job},
+				title=#{title},
+				contents=#{contents}
+				WHERE id=#{id}
+	</update>
+	
+	<delete id="deleteBoard">
+			DELETE FROM BOARD
+				WHERE id=#{id}
+	</delete>
 	
 	
 	

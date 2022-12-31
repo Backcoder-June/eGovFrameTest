@@ -12,7 +12,12 @@ public interface BoardMapper {
 	
 	List<BoardVO> getAllBoard() throws Exception;
 
-	BoardVO getOneBoard(String title);
+	BoardVO getOneBoard(long id);
+
+	void updateBoard(BoardVO boardVO);
+
+	void deleteBoard(long id);
+	
 	
 
 
