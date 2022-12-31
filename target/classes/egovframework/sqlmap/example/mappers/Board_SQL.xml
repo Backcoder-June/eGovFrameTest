@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="egovframework.example.sample.service.impl.BoardMapper">
 
-	<resultMap id="sample" type="egovframework.example.sample.service.BoardVO">
+	<resultMap id="sample" type="egovframework.example.sample.service.entities.BoardVO">
 		<result property="job" column="job"/>
 		<result property="title" column="title"/>
 		<result property="contents" column="contents"/>
@@ -17,6 +17,20 @@
 				  , #{title}
 				  , #{contents} )
 	</insert>
+	
+	<select id="getAllBoard" resultType="boardVO">
+			SELECT
+				job, title, contents
+			FROM BOARD
+	</select>
+	
+	<select id="getOneBoard" resultType="boardVO">
+			SELECT
+				job, title, contents
+			FROM BOARD
+			WHERE title=#{title}
+	
+	</select>
 	
 	
 	

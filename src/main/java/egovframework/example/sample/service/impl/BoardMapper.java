@@ -1,11 +1,19 @@
 package egovframework.example.sample.service.impl;
 
-import egovframework.example.sample.service.BoardVO;
+import java.util.List;
+
+import egovframework.example.sample.service.entities.BoardVO;
 import egovframework.rte.psl.dataaccess.mapper.Mapper;
 
-@Mapper("BoardMapper")
+@Mapper("boardMapper")
 public interface BoardMapper {
 	
 	void insertBoard(BoardVO boardVO) throws Exception;
+	
+	List<BoardVO> getAllBoard() throws Exception;
+
+	BoardVO getOneBoard(String title);
+	
+
 
 }
