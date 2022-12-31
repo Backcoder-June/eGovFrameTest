@@ -19,7 +19,7 @@
 <c:forEach items="${allBoard }" var="eachboard">
 <hr>
 ${eachboard.job } <br> 
-<a href ="/egovproject/${eachboard.title }/oneboard.do"> ${eachboard.title } </a><br> 
+<a href ="/egovproject/${eachboard.id }/oneboard.do"> ${eachboard.title } </a><br> 
 ${eachboard.contents } <br> 
 <hr>
 </c:forEach>

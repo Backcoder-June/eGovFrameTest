@@ -21,5 +21,14 @@
 제목 : ${oneBoard.title } <br>
 내용 : ${oneBoard.contents } <br>
 
+<br> 
+
+<form action="/egovproject/${oneBoard.id }/updateboard.do" method="GET">
+<input type="submit" value="수정">
+</form>
+<form action="/egovproject/${oneBoard.id }/deleteboard.do" method="POST">
+<input type="submit" value="삭제">
+</form>
+
 </body>
 </html>

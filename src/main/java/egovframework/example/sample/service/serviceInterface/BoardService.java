@@ -10,6 +10,10 @@ public interface BoardService {
 
 	List<BoardVO> getAllBoard() throws Exception;
 
-	BoardVO getOneBoard(String title) throws Exception;
+	BoardVO getOneBoard(long id) throws Exception;
+
+	void updateBoard(BoardVO boardVO);
+
+	void deleteBoard(long id);
 
 }

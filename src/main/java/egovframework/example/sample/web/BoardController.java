@@ -33,7 +33,7 @@ public class BoardController {
 	public String writingProcess(BoardVO boardVO) throws Exception {
 		boardService.save(boardVO);
 		
-		return "redirect:/write.do";
+		return "redirect:/allboard.do";
 	}
 	
 	
@@ -44,12 +44,31 @@ public class BoardController {
 		return "board/allboard";
 	}
 	
-	@RequestMapping(value="/{title}/oneboard.do", method=RequestMethod.GET )
-	public String oneBoard(@PathVariable("title")String title, Model model) throws Exception {
-		System.out.println(title);
-		BoardVO oneBoard = boardService.getOneBoard(title);
+	@RequestMapping(value="/{id}/oneboard.do", method=RequestMethod.GET )
+	public String oneBoard(@PathVariable("id")long id, Model model) throws Exception {
+		BoardVO oneBoard = boardService.getOneBoard(id);
 		model.addAttribute("oneBoard", oneBoard); 
 		return "board/oneboard";
+	}
+	
+	@RequestMapping(value="/{id}/updateboard.do", method=RequestMethod.GET)
+	public String updateBoardForm(@PathVariable("id")long id, Model model) throws Exception {
+		BoardVO oneBoard = boardService.getOneBoard(id);
+		model.addAttribute("oneBoard", oneBoard);
+		return "board/updateBoard";
+	}
+	
+	@RequestMapping(value="/{id}/updateboard.do", method=RequestMethod.POST)
+	public String updateBoardProcess(BoardVO boardVO) {
+		boardService.updateBoard(boardVO);
+		return "redirect:/allboard.do"; 
+	}
+	
+	
+	@RequestMapping(value="/{id}/deleteboard.do", method=RequestMethod.POST)
+	public String deleteBoard(@PathVariable("id")long id) {
+		boardService.deleteBoard(id);
+		return "redirect:/allboard.do"; 
 	}
 	
 	

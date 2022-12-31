@@ -34,9 +34,28 @@ public class BoardServiceImpl extends EgovAbstractServiceImpl implements BoardSe
 
 
 	@Override
-	public BoardVO getOneBoard(String title) throws Exception {
-		return boardMapper.getOneBoard(title);
+	public BoardVO getOneBoard(long id) throws Exception {
+		return boardMapper.getOneBoard(id);
 	}
+
+
+
+	@Override
+	public void updateBoard(BoardVO boardVO) {
+		boardMapper.updateBoard(boardVO);
+	}
+
+
+
+	@Override
+	public void deleteBoard(long id) {
+		boardMapper.deleteBoard(id);
+		
+	}
+	
+	
+	
+	
 	
 	
 	
