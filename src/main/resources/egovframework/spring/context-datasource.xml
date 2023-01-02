@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+        http://www.springframework.org/schema/jdbc  http://www.springframework.org/schema/jdbc/spring-jdbc-4.0.xsd">
+	 
+	
+	<!-- <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:util="http://www.springframework.org/schema/util"
@@ -16,16 +23,7 @@
     </bean>
     	
     	
-    	<alias name="dataSource-${Globals.DbType}" alias="dataSource" />
-    	
-    	<!-- <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:jdbc="http://www.springframework.org/schema/jdbc"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
-        http://www.springframework.org/schema/jdbc  http://www.springframework.org/schema/jdbc/spring-jdbc-4.0.xsd">
-	 -->
-	
-	
+    	<alias name="dataSource-${Globals.DbType}" alias="dataSource" /> -->
 	
 	<!-- 테스트 실행용 
 	<jdbc:embedded-database id="dataSource" type="HSQL">
@@ -42,7 +40,8 @@
     -->  
     
     <!-- Mysql (POM에서 commons-dbcp, mysql-connector-java 관련 라이브러리 설정 ) --> 
-    <bean id="dataSource-mysql" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+    <!-- dataSource 이름에 -mysql 붙여서 알리아스 -->
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
         <property name="url" value="jdbc:mysql://127.0.0.1:3306/egovdb" />
         <property name="username" value="egov"/>
