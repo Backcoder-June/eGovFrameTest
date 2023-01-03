@@ -1,72 +1,55 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans"
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+	xmlns:beans="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:egov-security="http://www.egovframe.go.kr/schema/egov-security"
-	xmlns:security="http://www.springframework.org/schema/security"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
-		http://www.egovframe.go.kr/schema/egov-security http://www.egovframe.go.kr/schema/egov-security/egov-security-3.0.xsd
-		http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.2.xsd">
-		
-	<security:http pattern="/css/**" security="none"/>    
-    <security:http pattern="/images/**" security="none"/>
- 	<security:http pattern="/js/**" security="none"/>
- 	<security:http pattern="\A/WEB-INF/jsp/.*\Z" request-matcher="regex" security="none"/> 	
-	
-	<egov-security:config id="securityConfig" 
-		loginUrl="/mbr/loginView.do?login_error=0"
-		logoutSuccessUrl="/index.jsp"
-		loginFailureUrl="/mbr/loginView.do?login_error=1" 
-		accessDeniedUrl="/com/accessDenied.do"
-		
-		dataSource="dataSource"
-		jdbcUsersByUsernameQuery="
-				SELECT  MBER_ID USER_ID, 
-							PASSWORD PASSWORD,
-            				1 ENABLED,
-            				MBER_NO USER_NO,
-            				NM USER_NM,
-            				EMAIL USER_EMAIL,
-            				TELNO TEL_NO,
-            				MBTLNUM MOBLPHON_NO,
-            				ZIP USER_ZIP,
-            				ADRES USER_ADRES,
-            				DETAIL_ADRES USER_DETAIL_ADRES,
-            				code.CODE_NM AUTHOR_CODE
-				FROM  RTETNMBER mber, RTETCCODE code
-				WHERE  code.CODE_ID = mber.MNGR_SE and MBER_ID = ?"
-		jdbcAuthoritiesByUsernameQuery="
-				SELECT  MBER_ID USER_ID,
-                			CODE_NM AUTHORITY
-				FROM  RTETNMBER mber, RTETCCODE code
-				WHERE  code.CODE_ID = mber.MNGR_SE and MBER_ID = ?"
-		jdbcMapClass="egovframework.rte.rex.com.security.EgovSessionMapping"
-		
-		requestMatcherType="regex"
-		hash="md5"
-		hashBase64="false"
-		
-		concurrentMaxSessons="10"
-		concurrentExpiredUrl="/index.jsp?concurrent-expired=true"
-		
-		defaultTargetUrl="/mbr/actionMain.do"
-	/>
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
 
-	<egov-security:secured-object-config id="securedObjectConfig"
-		roleHierarchyString="
-				ROLE_ADMIN > ROLE_USER
-				ROLE_USER > ROLE_RESTRICTED
-				ROLE_RESTRICTED > IS_AUTHENTICATED_FULLY
-				IS_AUTHENTICATED_FULLY >	IS_AUTHENTICATED_REMEMBERED
-				IS_AUTHENTICATED_REMEMBERED > IS_AUTHENTICATED_ANONYMOUSLY"
-		sqlRolesAndUrl="
-				SELECT auth.URL url, code.CODE_NM authority
-				FROM RTETNAUTH auth, RTETCCODE code
-				WHERE code.CODE_ID = auth.MNGR_SE"
-	/>
 
-	<egov-security:initializer id="initializer"  
-		supportPointcut="false"
-		supportMethod="false"
-	/>
-			
-</beans>
+	<context:component-scan base-package="egovframework.example.security"/>
+
+	<http auto-config="true" use-expressions="true">
+
+		<!-- 모든 url 패턴에 ROLE_USER의 권한을 가지고 있을때만 접근가능 -->
+		<!-- <intercept-url pattern="/**" access="ROLE_USER" /> -->
+		<intercept-url pattern="/userPage/**" access="hasRole('ROLE_USER')"/>
+		<intercept-url pattern="/**" access="permitAll"/>
+		<access-denied-handler ref="userDeniedHandler" />
+
+
+		<form-login
+			username-parameter="loginId"
+			password-parameter="loginPwd"
+			login-processing-url="/login"
+			login-page="/loginPage.do"
+			default-target-url="/"
+		/>
+
+		<!-- 로그아웃할 url 및 로그아웃성공시 이동할 url -->
+
+		<logout
+			logout-url="/logout"
+			logout-success-url="/"
+			invalidate-session="true"
+			delete-cookies="true" />
+
+		<remember-me data-source-ref="dataSource"
+            remember-me-parameter="remember-me"
+            token-validity-seconds="604800"/>
+
+         <!-- <remember-me services-ref="" /> -->
+	</http>
+
+	<beans:bean id="userDeniedHandler" class="egovframework.example.security.UserDeniedHandler"></beans:bean>
+
+	<authentication-manager>
+		<authentication-provider ref="userAuthProvider"></authentication-provider>
+		<authentication-provider user-service-ref="userService"></authentication-provider>
+	</authentication-manager>
+
+	<beans:bean id="userService" class="egovframework.example.sample.service.CustomUserDetailsService"/>
+	<beans:bean id="userAuthProvider" class="egovframework.example.security.CustomAuthenticationProvider"/>
+
+</beans:beans>
