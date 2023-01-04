@@ -22,9 +22,9 @@
 		<form-login
 			username-parameter="loginId"
 			password-parameter="loginPwd"
-			login-processing-url="/login"
+			login-processing-url="http://localhost:8080/egovproject/login"
 			login-page="/loginPage.do"
-			default-target-url="/"
+			default-target-url="/home.do"
 		/>
 
 		<!-- 로그아웃할 url 및 로그아웃성공시 이동할 url -->

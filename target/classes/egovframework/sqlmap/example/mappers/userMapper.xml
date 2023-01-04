@@ -4,14 +4,14 @@
 	namespace="egovframework.example.sample.service.impl.UserMapper">
 
 	<resultMap id="resultUserVO"
-		type="egovframework.example.sample.service.UserVO">
+		type="egovframework.example.sample.service.entities.UserVO">
 		<result property="userId" column="USER_ID" />
 		<result property="userPassword" column="USER_PASSWORD" />
 		<result property="userName" column="USER_NAME" />
 		<result property="userAuthority" column="USER_AUTHORITY" />
 		<result property="userEnabled" column="USER_ENABLED" />
 	</resultMap>
-	<select id="getUserById" parameterType="String" resultMap="resultUserVO">
+	<select id="getUserById" parameterType="String" resultType="userVO">
 		SELECT
 			  USER_ID
 			, USER_PASSWORD
@@ -19,7 +19,7 @@
 			, USER_AUTHORITY
 			, USER_ENABLED
 		FROM TB_USER
-		WHERE USER_ID = #{userId}
+		WHERE USER_ID = #{userName}
 	</select>
 
 </mapper>

@@ -7,5 +7,6 @@
 		<typeAlias alias="searchVO" type="egovframework.example.sample.service.SampleDefaultVO"/>
 		<typeAlias alias="sampleVO" type="egovframework.example.sample.service.SampleVO"/>
 		<typeAlias alias="boardVO" type="egovframework.example.sample.service.entities.BoardVO"/>
+		<typeAlias alias="userVO" type="egovframework.example.sample.service.entities.UserVO"/>
     </typeAliases>
 </configuration>
