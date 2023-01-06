@@ -23,6 +23,11 @@ public class BoardController {
 	
 	@Resource(name="boardServiceImpl")
 	public BoardService boardService;
+	
+	@RequestMapping(value="/main.do", method=RequestMethod.GET)
+	public String homePage() {
+		return "home";
+	}
 
 	@RequestMapping(value="/write.do", method=RequestMethod.GET )
 	public String writingForm() {
