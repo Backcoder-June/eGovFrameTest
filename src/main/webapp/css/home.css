@@ -1,0 +1,38 @@
+body{
+	background-image:url('/egovproject/images/background.png');
+	
+}
+
+.mainText{
+	text-align:center;
+	font-size:30px;
+	color:rgb(22,22,169); 
+	
+	
+}
+
+.mainlogo{
+	display:block;
+	margin:auto;
+	margin-bottom:3%;
+	margin-top:3%;
+	
+}
+
+.mainlinkimg{
+	width:250px;
+	height:350px;
+	text-align:center; 
+	display:block; 
+	float:left;
+	margin-left:55px;
+	margin-right:55px; 
+	margin-top:7%; 
+	border-radius:20px;
+}
+
+.linklist{
+	width:900px; 
+	margin-left:auto;
+	margin-right:auto;
+}
