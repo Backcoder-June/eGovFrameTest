@@ -7,10 +7,13 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import egovframework.example.sample.service.entities.BoardVO;
 import egovframework.example.sample.service.serviceInterface.BoardService;
@@ -45,15 +48,18 @@ public class BoardController {
 	@RequestMapping(value="/allboard.do", method=RequestMethod.GET )
 	public String allBoard(Model model) throws Exception {
 		List<BoardVO> allBoard = boardService.getAllBoard();
+		int allBoardCount = allBoard.size();
 		model.addAttribute("allBoard", allBoard);
+		model.addAttribute("allBoardCount", allBoardCount);
 		return "board/allboard";
 	}
 	
-	@RequestMapping(value="/{id}/oneboard.do", method=RequestMethod.GET )
-	public String oneBoard(@PathVariable("id")long id, Model model) throws Exception {
-		BoardVO oneBoard = boardService.getOneBoard(id);
-		model.addAttribute("oneBoard", oneBoard); 
-		return "board/oneboard";
+	@ResponseBody
+	@RequestMapping(value="/oneboard.do",method=RequestMethod.POST, produces= {"application/json; charset=utf-8"})
+	public String oneBoard(long oneboardId, Model model) throws Exception {
+		System.out.println("ajax 받아는 짐 ");
+		BoardVO oneBoard = boardService.getOneBoard(oneboardId);
+		return "{\"oneBoardTitle\" : \"" + oneBoard.getTitle() + "\", \"oneBoardContents\" : \"" + oneBoard.getContents() + "\"}";
 	}
 	
 	@RequestMapping(value="/{id}/updateboard.do", method=RequestMethod.GET)
