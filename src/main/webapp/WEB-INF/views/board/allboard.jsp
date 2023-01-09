@@ -37,6 +37,12 @@
 						let boardTitle = res.oneBoardTitle; 
 						let boardContents = res.oneBoardContents;
 						
+						// 다시 click 시 제거 
+						if($("#oneboardRes" + oneboardId).html() != ''){
+							$("#oneboardRes" + oneboardId).html('');
+							return false;
+						}
+						
 						$("#oneboardRes" + oneboardId).html(boardTitle);
 						$("#oneboardRes" + oneboardId).append('<br> 내용 : ' + boardContents);
 					} //success

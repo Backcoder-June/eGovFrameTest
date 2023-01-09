@@ -57,7 +57,6 @@ public class BoardController {
 	@ResponseBody
 	@RequestMapping(value="/oneboard.do",method=RequestMethod.POST, produces= {"application/json; charset=utf-8"})
 	public String oneBoard(long oneboardId, Model model) throws Exception {
-		System.out.println("ajax 받아는 짐 ");
 		BoardVO oneBoard = boardService.getOneBoard(oneboardId);
 		return "{\"oneBoardTitle\" : \"" + oneBoard.getTitle() + "\", \"oneBoardContents\" : \"" + oneBoard.getContents() + "\"}";
 	}
