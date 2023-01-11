@@ -34,8 +34,8 @@
 					},
 					
 					success: function(res){
-						let boardTitle = res.oneBoardTitle; 
-						let boardContents = res.oneBoardContents;
+						let boardTitle = res.oneBoard.title; 
+						let boardContents = res.oneBoard.contents;
 						
 						// 다시 click 시 제거 
 						if($("#oneboardRes" + oneboardId).html() != ''){

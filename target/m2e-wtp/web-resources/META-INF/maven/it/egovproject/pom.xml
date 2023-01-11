@@ -68,16 +68,16 @@
 	<dependencies>
 	
 <!-- 잭슨 data-bind -->	
-<!-- <dependency>
+<dependency>
 <groupId>com.fasterxml.jackson.core</groupId>
 <artifactId>jackson-core</artifactId>
-<version>2.4.3</version>
+<version>2.9.9</version>
 </dependency>
 <dependency>
 <groupId>com.fasterxml.jackson.core</groupId>
 <artifactId>jackson-databind</artifactId>
-<version>2.4.3</version>
-</dependency> -->
+<version>2.9.9</version>
+</dependency>
 	
 	
 	<!-- 스프링 시큐리티    -->
