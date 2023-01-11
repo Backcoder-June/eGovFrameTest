@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import egovframework.example.sample.service.entities.BoardVO;
 import egovframework.example.sample.service.serviceInterface.BoardService;
@@ -54,11 +55,23 @@ public class BoardController {
 		return "board/allboard";
 	}
 	
-	@ResponseBody
-	@RequestMapping(value="/oneboard.do",method=RequestMethod.POST, produces= {"application/json; charset=utf-8"})
-	public String oneBoard(long oneboardId, Model model) throws Exception {
+	/*
+	 * @ResponseBody
+	 * 
+	 * @RequestMapping(value="/oneboard.do",method=RequestMethod.POST, produces=
+	 * {"application/json; charset=utf-8"}) public String oneBoard(long oneboardId,
+	 * Model model) throws Exception { BoardVO oneBoard =
+	 * boardService.getOneBoard(oneboardId); return "{\"oneBoardTitle\" : \"" +
+	 * oneBoard.getTitle() + "\", \"oneBoardContents\" : \"" +
+	 * oneBoard.getContents() + "\"}"; }
+	 */	
+	
+	@RequestMapping(value="/oneboard.do", method=RequestMethod.POST, produces= {"application/json; charset=utf-8"})
+	public ModelAndView oneboardajax(long oneboardId) throws Exception {
 		BoardVO oneBoard = boardService.getOneBoard(oneboardId);
-		return "{\"oneBoardTitle\" : \"" + oneBoard.getTitle() + "\", \"oneBoardContents\" : \"" + oneBoard.getContents() + "\"}";
+		ModelAndView mav = new ModelAndView("jsonView");
+		mav.addObject("oneBoard", oneBoard);
+		return mav;
 	}
 	
 	@RequestMapping(value="/{id}/updateboard.do", method=RequestMethod.GET)

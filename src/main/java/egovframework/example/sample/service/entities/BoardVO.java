@@ -23,6 +23,14 @@ public class BoardVO {
 	
 	
 	
+	
+	
+	
+	@Override
+	public String toString() {
+		return this.title + " " + this.contents;
+	}
+
 	public long getId() {
 		return id;
 	}
