@@ -34,8 +34,15 @@
 					},
 					
 					success: function(res){
-						let boardTitle = res.oneBoard.title; 
-						let boardContents = res.oneBoard.contents;
+						let boardTitle = res.responseEntity.body.title; 
+						let boardContents = res.responseEntity.body.contents;
+						
+						// responseEntity 응답형식 ( JSON.stringify(res)해서 확인 )
+						// .headers/.body/.statusCode/.statusCodeValue
+						
+						console.log(res.responseEntity.statusCode);				
+						console.log(res.responseEntity.statusCodeValue);				
+				
 						
 						// 다시 click 시 제거 
 						if($("#oneboardRes" + oneboardId).html() != ''){
