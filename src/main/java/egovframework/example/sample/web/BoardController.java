@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -66,11 +68,21 @@ public class BoardController {
 	 * oneBoard.getContents() + "\"}"; }
 	 */	
 	
+	// @ResponseBody => xml jsonView 로 전송 
 	@RequestMapping(value="/oneboard.do", method=RequestMethod.POST, produces= {"application/json; charset=utf-8"})
 	public ModelAndView oneboardajax(long oneboardId) throws Exception {
 		BoardVO oneBoard = boardService.getOneBoard(oneboardId);
 		ModelAndView mav = new ModelAndView("jsonView");
-		mav.addObject("oneBoard", oneBoard);
+		
+		if(oneBoard != null) {
+			mav.addObject("responseEntity", new ResponseEntity<>(oneBoard, HttpStatus.OK));
+		}
+		if(oneBoard == null) {
+			mav.addObject("responseEntity", new ResponseEntity<>(HttpStatus.BAD_REQUEST));
+		}
+		
+//		mav.addObject("oneBoard", oneBoard);
+		
 		return mav;
 	}
 	
