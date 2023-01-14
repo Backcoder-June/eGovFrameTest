@@ -36,6 +36,8 @@
 					success: function(res){
 						let boardTitle = res.responseEntity.body.title; 
 						let boardContents = res.responseEntity.body.contents;
+						let boardJob = res.responseEntity.body.job;
+					
 						
 						// responseEntity 응답형식 ( JSON.stringify(res)해서 확인 )
 						// .headers/.body/.statusCode/.statusCodeValue
@@ -52,8 +54,40 @@
 						
 						$("#oneboardRes" + oneboardId).html(boardTitle);
 						$("#oneboardRes" + oneboardId).append('<br> 내용 : ' + boardContents);
+						$("#oneboardRes" + oneboardId).append('<br><button type="button" id="editbtn' + oneboardId + '">수정하기</button>');
+
+						// 동적 태그에 이벤트 생성
+						$("#oneboardRes" + oneboardId).on("click", "button", function(){
+							
+							//create element (form)
+							var newForm = $('<form></form>');
+							
+							//set attribute (form) 
+							newForm.attr("method","post");
+							newForm.attr("action","/egovproject/" + oneboardId + "/updateboard.do");
+							
+							// create element & set attribute (input) 
+							newForm.append($('<input/>', {type: 'text', name: 'title', value:boardTitle }));
+							newForm.append($('<input/>', {type: 'text', name: 'contents', value:boardContents }));
+							newForm.append($('<input/>', {type: 'submit', value:'등록' }));
+
+							// append form (to body) 
+							newForm.appendTo("#oneboardEdit" + oneboardId);
+
+							// submit form
+							//newForm.submit();
+							
+						/* 	
+							$("#oneboardEdit" + oneboardId).append('<form action="/egovproject/' + oneboardId + '/updateboard.do" method="POST" >');
+							$("#oneboardEdit" + oneboardId).append('<table><tr><th>제목</th><td><input type="text" name="title" value="' + boardTitle + '"></td></tr>');
+							$("#oneboardEdit" + oneboardId).append('<tr><th>내용</th><td><input type="text" name="contents" value="' + boardContents + '"></td></tr>');
+							$("#oneboardEdit" + oneboardId).append('<tr><th><input type="submit" value="등록"></th></tr></table>');
+							$("#oneboardEdit" + oneboardId).append('</form>'); */
+							
+	    				});
+
+						
 					} //success
-					
 				}) // ajax 
 	    	}); // onclick  
     		})(i); // for function(i) 
@@ -74,6 +108,7 @@ ${eachboard.job } <br>
 <input id="oneboardId${vs.index}" type="button" value= ${eachboard.id } style="display:none">
 <div id="oneboardRes${eachboard.id }"></div>
 
+<div id="oneboardEdit${eachboard.id }"></div>
 
 <hr>
 </c:forEach>
