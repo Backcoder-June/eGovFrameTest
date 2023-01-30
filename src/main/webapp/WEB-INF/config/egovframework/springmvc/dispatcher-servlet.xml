@@ -7,6 +7,7 @@
                 http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
                 http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
 
+	<!-- component-scan -->
     <context:component-scan base-package="egovframework">
         <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
         <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Service"/>
@@ -44,6 +45,7 @@
         </property>
     </bean>
 
+	<!-- View Resolver -->
     <bean class="org.springframework.web.servlet.view.UrlBasedViewResolver" p:order="1"
 	    p:viewClass="org.springframework.web.servlet.view.JstlView"
 	    p:prefix="/WEB-INF/views/" p:suffix=".jsp"/>
@@ -63,11 +65,11 @@
 	<!-- egov - AJAX -->
 	<bean class="org.springframework.web.servlet.view.BeanNameViewResolver"> 
     <property name="order" value="0"/> 
-</bean> 
-<bean id="jsonView" class="org.springframework.web.servlet.view.json.MappingJackson2JsonView"> 
-    <property name="contentType" value="application/json;charset=UTF-8"> </property> 
-</bean>
-	
+	</bean> 
 
+	<bean id="jsonView" class="org.springframework.web.servlet.view.json.MappingJackson2JsonView"> 
+	    <property name="contentType" value="application/json;charset=UTF-8"> </property> 
+	</bean>
+	
     <mvc:view-controller path="/cmmn/validator.do" view-name="cmmn/validator"/>
 </beans>

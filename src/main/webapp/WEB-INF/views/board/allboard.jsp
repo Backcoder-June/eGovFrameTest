@@ -7,7 +7,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title></title>
+  <title>allBoard</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
   <script src="/egovproject/webjars/jquery/3.6.0/jquery.min.js"></script>
   <!-- Latest compiled and minified CSS -->
@@ -76,16 +76,7 @@
 
 							// submit form
 							//newForm.submit();
-							
-						/* 	
-							$("#oneboardEdit" + oneboardId).append('<form action="/egovproject/' + oneboardId + '/updateboard.do" method="POST" >');
-							$("#oneboardEdit" + oneboardId).append('<table><tr><th>제목</th><td><input type="text" name="title" value="' + boardTitle + '"></td></tr>');
-							$("#oneboardEdit" + oneboardId).append('<tr><th>내용</th><td><input type="text" name="contents" value="' + boardContents + '"></td></tr>');
-							$("#oneboardEdit" + oneboardId).append('<tr><th><input type="submit" value="등록"></th></tr></table>');
-							$("#oneboardEdit" + oneboardId).append('</form>'); */
-							
 	    				});
-
 						
 					} //success
 				}) // ajax 
@@ -103,16 +94,14 @@
 <hr>
 ${eachboard.job } <br> 
 
+	<div id="oneboardBTN${vs.index}" style="cursor:pointer; font-size:20px; color:orange;">${eachboard.title }</div>
+		<input id="oneboardId${vs.index}" type="button" value= ${eachboard.id } style="display:none">
+	<div id="oneboardRes${eachboard.id }"></div>
 
-<div id="oneboardBTN${vs.index}" style="cursor:pointer; font-size:20px; color:orange;">${eachboard.title }</div>
-<input id="oneboardId${vs.index}" type="button" value= ${eachboard.id } style="display:none">
-<div id="oneboardRes${eachboard.id }"></div>
-
-<div id="oneboardEdit${eachboard.id }"></div>
+	<div id="oneboardEdit${eachboard.id }"></div>
 
 <hr>
 </c:forEach>
-
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
 </body>
